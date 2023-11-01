@@ -1,5 +1,5 @@
 import React from "react";
-import Pdf from "./Documentation.pdf";
+
 import "./Footer.css";
 import { Link } from "react-router-dom";
 function Footer() {
@@ -141,11 +141,7 @@ function Footer() {
                   </p>
                 </>
               )}
-              <p>
-                <a href={Pdf} target="blank" className="text-gray-600" download>
-                  Documentation
-                </a>
-              </p>
+             
             </div>
             <div className="">
               <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">

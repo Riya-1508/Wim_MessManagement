@@ -134,7 +134,7 @@ function SignUp() {
       <div className="h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
         {/* <div className="h-screen flex justify-center items-center bgimage"> */}
         <div
-          className={`bg-white w-[950px] h-[570px] rounded-3xl flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+          className={`bg-white w-[950px] h-[590px] rounded-3xl flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
             isPageLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -150,7 +150,7 @@ function SignUp() {
                 </label>
                 <input
                   type="email"
-                  pattern=".+@[A-Za-z0-9.-]+\.vjti.ac.in"
+                  
                   name="title"
                   className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
                   onChange={(e) => setEmail(e.target.value)}
@@ -163,11 +163,11 @@ function SignUp() {
                   htmlFor="registrationid"
                   className="text-xl text-purple-violent font-bold"
                 >
-                  Registration ID:{" "}
+                  Card Number:{" "}
                 </label>
                 <input
                   type="number"
-                  maxLength={9}
+                 
                   name="registrationid"
                   className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
                   onChange={(e) => setregId(e.target.value)}

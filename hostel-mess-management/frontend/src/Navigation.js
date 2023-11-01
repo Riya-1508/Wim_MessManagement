@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavigationImage from "./NavigationImage.png";
-import Pdf from "./Documentation.pdf";
+
 import "./Navigation.css";
 import axios from "axios";  
 
@@ -89,13 +89,13 @@ function Navigation() {
             Home
           </Link>
           <a
-            href={Pdf}
+            
             target="_blank"
             rel="noopener noreferrer"
             className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
             download
           >
-            Documentation
+            About us
           </a>
 
           {isAuthenticated ? (

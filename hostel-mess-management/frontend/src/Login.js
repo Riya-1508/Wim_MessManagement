@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cardNumber, setcardNumber] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
@@ -67,11 +68,9 @@ const diffToast = (message, type) => {
   return (
     <div>
       <Navigation />
-      <div
-        className={`h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp `}
-      >
+      <div className="h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
         <div
-          className={`bg-white w-[500px] h-[520px] rounded-3xl flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+          className={`bg-white w-[500px] h-[600px] rounded-3xl flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
             isPageLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -84,11 +83,9 @@ const diffToast = (message, type) => {
               >
                 Email:{" "}
               </label>
-              <p>(Use only VJTI Email)</p>
               <div>
                 <input
                   type="email"
-                  pattern=".+@[A-Za-z0-9.-]+\.vjti.ac.in"
                   name="title"
                   className="my-2 shadow-lg appearance border rounded-2xl w-96 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
                   onChange={(e) => setEmail(e.target.value)}
@@ -113,6 +110,23 @@ const diffToast = (message, type) => {
                 ></input>
               </div>
             </div>
+            <div className="my-4">
+              <label
+                htmlFor="password"
+                className="text-xl text-purple-violent font-bold"
+              >
+                Card Number:{" "}
+              </label>
+              <div>
+                <input
+                  type="password"
+                  name="password"
+                  className="my-2 shadow-lg appearance-none border rounded-2xl w-96 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  onChange={(e) => setcardNumber(e.target.value)}
+                  value={cardNumber}
+                ></input>
+              </div>
+            </div>
             <button
               type="submit"
               className="inline-block px-6 py-2.5 bg-white text-pink-violent font-medium text-lg leading-tight uppercase rounded-full shadow-md hover:dark:bg-gray-900 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
@@ -120,7 +134,7 @@ const diffToast = (message, type) => {
             >
               Submit
             </button>
-            <ToastContainer limit={1}/>
+            <ToastContainer limit={1} />
           </form>
           <div className="my-2 text-white">
             <p className="text-xl text-black">Don't have an account?</p>
