@@ -1,0 +1,337 @@
+[
+    {
+      "id":1,
+      "station":"CSMT"
+    },
+    { "id":2,
+      "station":"Masjid"
+    },
+    { "id":3,
+       "station":"Sandhurst Road"
+    },
+    { "id":4,
+       "station":"Byculla"
+    },
+    { "id":5,
+       "station":"Chinchpokli"
+    },
+    { "id":6,
+       "station":"Currey Road"
+    },
+    { "id":7,
+       "station":"Parel"
+    },
+    { "id":8,
+      "station":"Sion"
+    },
+    { "id":9,
+      "station":"Kurla"
+    },
+    { "id":10,
+      "station":"Vidyavihar"
+    },
+    { "id":11,
+      "station":"Ghatkopar"
+    },
+    { "id":12,
+      "station":"Vikhroli"
+    },
+    { "id":13,
+      "station":"Kanjur Marg"
+    },
+    { "id":14,
+      "station":"Bhandup"
+    },
+    { "id":15,
+      "station":"Nahur"
+    },
+    { "id":16,
+      "station":"Mulund"
+    },
+    { "id":17,
+      "station":"Thane"
+    },
+    { "id":18,
+      "station":"Kalva"
+    },
+    { "id":19,
+      "station":"Mumbra"
+    },
+    { "id":20,
+      "station":"Diva Jn"
+    },
+    { "id":21,
+      "station":"Kopar"
+    },
+    { "id":22,
+      "station":"Dombivli"
+    },
+    { "id":23,
+      "station":"Thakurli"
+    },
+    { "id":24,
+      "station":"Kalyan"
+    },
+    { "id":25,
+      "station":"Vithalwadi"
+    },
+    { "id":26,
+      "station":"Ulhas Nagar"
+    },
+    { "id":27,
+      "station":"Ambernath"
+    },
+    { "id":28,
+      "station":"Badlapur"
+    },
+    { "id":29,
+      "station":"Vangani"
+    },
+    { "id":30,
+      "station":"Shelu"
+    },
+    { "id":31,
+      "station":"Neral"
+    },
+    { "id":32,
+      "station":"Bhivpuri Road"
+    },
+    { "id":33,
+      "station":"Karjat"
+    },
+    { "id":34,
+      "station":"Palasdhari"
+    },
+    { "id":35,
+      "station":"Kelavli"
+    },
+    { "id":36,
+      "station":"Dolavli"
+    },
+    { "id":37,
+      "station":"Lowjee"
+    },
+    { "id":38,
+      "station":"Kopoli"
+    },
+    { "id":39,
+      "station":"Shahad"
+    },
+    { "id":40,
+      "station":"Ambivli"
+    },
+    { "id":41,
+      "station":"Titwala"
+    },
+    { "id":42,
+      "station":"Khadavli"
+    },
+    { "id":43,
+      "station":"Vasind"
+    },
+    { "id":44,
+      "station":"Asangaon"
+    },
+    { "id":45,
+      "station":"Atgaon"
+    },
+    { "id":46,
+      "station":"Thansit"
+    },
+    { "id":47,
+      "station":"Khardi"
+    },
+    { "id":48,
+      "station":"Umbermali"
+    },
+    { "id":49,
+      "station":"Kasara"
+    },
+    { "id":50,
+      "station":"Churchgate"
+    },
+    { "id":51,
+      "station":"Marine Lines"
+    },
+    { "id":52,
+      "station":"Charni Road"
+    },
+    { "id":53,
+      "station":"Grant Road"
+    },
+    { "id":54,
+      "station":"Mumbai Central"
+    },
+    { "id":55,
+      "station":"Mahalakshmi"
+    },
+    { "id":56,
+      "station":"Lower Parel"
+    },
+    { "id":57,
+      "station":"Prabhadevi"
+    },
+    { "id":58,
+      "station":"Mahim Jn"
+    },
+    { "id":59,
+      "station":"Bandra"
+    },
+    { "id":60,
+      "station":"Khar Road"
+    },
+    { "id":61,
+      "station":"Santa Cruz"
+    },
+    { "id":62,
+      "station":"Vile Parle"
+    },
+    { "id":63,
+      "station":"Andheri"
+    },
+    { "id":64,
+      "station":"Jogeshwari"
+    },
+    { "id":65,
+      "station":"Ram Mandir"
+    },
+    { "id":66,
+      "station":"Goregaon"
+    },
+    { "id":67,
+      "station":"Malad"
+    },
+    { "id":68,
+      "station":"Kandivali"
+    },
+    { "id":69,
+      "station":"Borivali"
+    },
+    { "id":70,
+      "station":"Dahisar"
+    },
+    { "id":71,
+      "station":"Mira Road"
+    },
+    { "id":72,
+      "station":"Bhayander"
+    },
+    { "id":73,
+      "station":"Naigaon"
+    },
+    { "id":74,
+      "station":"Vasai Road"
+    },
+    { "id":75,
+      "station":"Nalla Sopara"
+    },
+    { "id":76,
+      "station":"Virar"
+    },
+    { "id":77,
+      "station":"Vaitarana"
+    },
+    { "id":78,
+      "station":"Saphale"
+    },
+    { "id":79,
+      "station":"Kelva Road"
+    },
+    { "id":80,
+      "station":"Palghar"
+    },
+    { "id":81,
+      "station":"Umroli Road"
+    },
+    { "id":82,
+      "station":"Boisar"
+    },
+    { "id":83,
+      "station":"Vangaon"
+    },
+    { "id":84,
+      "station":"Dahanu Road"
+    },
+    { "id":85,
+      "station":"Dockyard Road"
+    },
+    { "id":86,
+      "station":"Reay Road"
+    },
+    { "id":87,
+      "station":"Cotton Green"
+    },
+    { "id":88,
+      "station":"Sewri"
+    },
+    { "id":89,
+      "station":"GTB Nagar"
+    },
+    { "id":90,
+      "station":"Chunabhatti"
+    },
+    { "id":91,
+      "station":"Tilaknagar"
+    },
+    { "id":92,
+      "station":"Chembur"
+    },
+    { "id":93,
+      "station":"Govandi"
+    },
+    { "id":94,
+      "station":"Mankhurd"
+    },
+    { "id":95,
+      "station":"Vashi"
+    },
+    { "id":96,
+      "station":"Sanpada"
+    },
+    { "id":97,
+      "station":"Juinagar"
+    },
+    { "id":98,
+      "station":"Nerul"
+    },
+    { "id":99,
+      "station":"Seawood Darave"
+    },
+    { "id":100,
+      "station":"Belapur CBD"
+    },
+    { "id":101,
+      "station":"Kharghar"
+    },
+    { "id":102,
+      "station":"Manasarovar"
+    },
+    { "id":103,
+      "station":"Khandeshwar"
+    },
+    { "id":104,
+      "station":"Panvel"
+    },
+    { "id":105,
+      "station":"Airoli"
+    },
+    { "id":106,
+      "station":"Rabale"
+    },
+    { "id":107,
+      "station":"Ghansoli"
+    },
+    { "id":108,
+      "station":"Koparkhairne"
+    },
+    { "id":109,
+      "station":"Turbhe"
+    },
+    { "id":110,
+      "station":"Bamandongri"
+    },
+    { "id":111,
+      "station":"Kharkopar"
+    }
+  ]
+  

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+
+.bgimage {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG0gy42OMlPttBKCMqeDCNM_qJ-uNUhxwsig&usqp=CAU");
+    background-repeat: no-repeat;
+
+}
+
+.bg-picSignUp {
+    background-image: url("picSignUp2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+}
+
+/* Add this CSS to make the days-left div look nice */
+.days-left {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.days-left p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.days-left p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+@tailwind utilities;

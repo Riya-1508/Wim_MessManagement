@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+.bgimage
+{
+    background-image: "picSignUp.jpg";
+    /* background-image: url("https: //www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fdesktop-wallpaper-tfmdu&psig=AOvVaw1dD2ZyK1ZbidibuvziWXco&ust=1689873180510000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLC146aim4ADFQAAAAAdAAAAABAE"); */
+    /* background-image: url("https://akm-img-a-in.tosshub.com/indiatoday/images/story/202206/prakash-sahoo-MgppNRJShm0-unsp_1200x768.jpeg?VersionId=uY_qOBlUMdZO6vbJuXJHKVcQwfNsG5Q6&size=690:388"); */
+    background-repeat: no-repeat;
+    background-size:cover;
+    opacity: 0.5;
+    /* opacity: 0.9; */
+}
+
+.bg-picSignUp {
+    background-image: url("picSignUp2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+}
+@tailwind utilities;

@@ -1,0 +1,83 @@
+/* In your CSS file or as inline styles */
+
+.center-div {
+    /* height: 100vh; */
+    /* Set the height to full viewport height */
+    display: flex;
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
+}
+
+.center-rectangle {
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    /* height: 90vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    /* Set the rectangle color */
+    padding: 0px;
+    /* Adjust the padding as needed */
+}
+.button{
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview{
+    margin-top: 10vh;
+    max-width: 80vh;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rectangle {
+    background-color: white;
+    /* Set the background color of the centered div */
+    border: 2px solid #ccc;
+    /* Add a border to create the rectangle effect */
+    padding: 20px;
+    max-width: 80vh;
+    /* Add padding to the centered content */
+}
+
+.hey{
+    height: 80vh;
+}
+
+.image-cell {
+    width: 15%;
+    text-align: center;
+    /* Center the image horizontally */
+    padding: 20px;
+    /* Add padding to create space around the image */
+}
+
+.text-cell {
+    width: 70%;
+    padding: 20px;
+    /* Add padding to create space around the text */
+}
+
+.text-cell h2 {
+    font-weight: 900;
+    color: brown;
+}
+
+.text-cell p {
+    margin-top: 10px;
+    /* Add some spacing between the heading and paragraph */
+}
+
+.center-table {
+    width: 100%;
+    margin: 0 auto;
+    /* Center the entire table on the page */
+}

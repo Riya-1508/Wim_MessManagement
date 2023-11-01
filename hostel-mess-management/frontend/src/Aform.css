@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+.bgimage
+{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG0gy42OMlPttBKCMqeDCNM_qJ-uNUhxwsig&usqp=CAU");
+    background-repeat: no-repeat;
+    
+}
+
+.bg-picSignUp {
+    background-image: url("picSignUp2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+    min-height: 110vh;
+}
+@tailwind utilities;
