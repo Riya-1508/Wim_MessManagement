@@ -16,7 +16,7 @@ function SignUp() {
   const [firstname, setFirstName] = useState("");
   const [middlename, setmiddleName] = useState("");
   const [surname, setsurName] = useState("");
-  const [regId, setregId] = useState("");
+  const [cardNumber, setcardNumber] = useState("");
   const [phnNumber, setphnNumber] = useState("");
   const [error, setError] = useState(false);
   const [latestError, setLatestError] = useState("");
@@ -79,7 +79,7 @@ function SignUp() {
           "http://localhost:5000/api/auth/createUser",
           {
             email: email,
-            regId: regId,
+            cardNumber: cardNumber,
             firstname: firstname,
             middlename: middlename,
             surname: surname,
@@ -104,7 +104,7 @@ function SignUp() {
        
         if (
           email === "" ||
-          regId === "" ||
+          cardNumber === "" ||
           firstname === "" ||
           middlename === "" ||
           surname === "" ||
@@ -170,8 +170,8 @@ function SignUp() {
                  
                   name="registrationid"
                   className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                  onChange={(e) => setregId(e.target.value)}
-                  value={regId}
+                  onChange={(e) => setcardNumber(e.target.value)}
+                  value={cardNumber}
                   minLength={10}
                 ></input>
               </div>

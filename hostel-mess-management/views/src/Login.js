@@ -43,7 +43,7 @@ const diffToast = (message, type) => {
         {
           email,
           password,
-          // regId,
+         cardNumber,
         },
         config
       );

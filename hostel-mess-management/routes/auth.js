@@ -14,11 +14,11 @@ router.post(
   "/createUser",
   [
     body("email", "Enter a valid email").isEmail(),
-    body("regId", "Enter a valid name").isLength({ max: 9, min: 9 }),
+    // body("regId", "Enter a valid name").isLength({ max: 9, min: 9 }),
 
-    body("firstname", "Enter a valid name").isLength({ min: 3 }),
-    body("middlename", "Enter a valid name").isLength({ min: 3 }),
-    body("surname", "Enter a valid name").isLength({ min: 3 }),
+    // body("firstname", "Enter a valid name").isLength({ min: 3 }),
+    // body("middlename", "Enter a valid name").isLength({ min: 3 }),
+    // body("surname", "Enter a valid name").isLength({ min: 3 }),
 
     body("phnNumber", "Enter a valid name").isLength({ max: 10, min: 10 }),
     body("password", "Password must be atleast 5 characters").isLength({
@@ -54,7 +54,7 @@ router.post(
       // Create a new user
       user = await User.create({
         email: req.body.email,
-        regId: req.body.regId,
+        cardNumber: req.body.cardNumber,
         firstname: req.body.firstname,
         middlename: req.body.middlename,
         surname: req.body.surname,
