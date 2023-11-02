@@ -52,7 +52,6 @@ const diffToast = (message, type) => {
               >
                 Email:{" "}
               </label>
-              <p>(Use only VJTI Email)</p>
               <div>
                 <input
                   type="email"

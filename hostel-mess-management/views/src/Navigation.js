@@ -94,7 +94,7 @@ function Navigation() {
             to="/Menu"
             className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
           >
-            Menus
+            Menu
           </Link>
           
         
