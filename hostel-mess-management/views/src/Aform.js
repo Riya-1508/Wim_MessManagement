@@ -141,7 +141,7 @@ function Application() {
     return hash;
   }
 
-  const ticketNo = generateAlphanumericHash(userDetails.regId);
+  const cardNo = generateAlphanumericHash(userDetails.phnNumber);
 
   const [isPageLoaded, setPageLoaded] = useState(false);
 
@@ -287,16 +287,13 @@ function Application() {
           gender: gender,
           course: course,
           year: year,
-          duration: duration,
-          class1: class1,
-          stationfrom: stationfrom,
-          stationto: stationto,
-          regId: userDetails.regId,
-          ticketNo: ticketNo,
+          
+          
+          cardNo: cardNo,
           // class2: class2,
           // periodfrom: periodfrom,
           // periodTo: periodTo,
-          category: category,
+         
           address: address,
           phnNumber: userDetails.phnNumber,
           isPresent: isPresent,
@@ -463,191 +460,11 @@ function Application() {
                         </select>
                       </div>
                     </div>
-                    <div
-                      className="my-1 flex space-x-20"
-                      style={{ marginLeft: "50px" }}
-                    >
-                      <div>
-                        <label
-                          htmlFor="course"
-                          className="ml-2 text-xl font-bold"
-                        >
-                          Courses:{" "}
-                        </label>
-                        <select
-                          name="course"
-                          id="course"
-                          onChange={(e) => setCourse(e.target.value)}
-                          defaultValue={"default"}
-                          value={course}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="M.Tech">M.Tech</option>
-                          <option value="B.Tech">B.Tech</option>
-                          <option value="MCA">MCA</option>
-                          <option value="Diploma">Diploma</option>
-                          <option value="FDC">FDC</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label htmlFor="year" className="text-xl font-bold">
-                          Year:{" "}
-                        </label>
-                        <select
-                          name="year"
-                          id="year"
-                          onChange={(e) => setYear(e.target.value)}
-                          defaultValue={"default"}
-                          value={year}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="FY">FY</option>
-                          <option value="SY">SY</option>
-                          <option value="TY">TY</option>
-                          <option value="Final YR">Final YR</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="Selecttheoption"
-                          className="ml-2 text-xl font-bold"
-                        >
-                          Duration:{" "}
-                        </label>
-                        <select
-                          name="Selecttheoption"
-                          id="Selecttheoption"
-                          onChange={(e) => setDuration(e.target.value)}
-                          defaultValue={"default"}
-                          value={duration}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="Monthly">Monthly</option>
-                          <option value="Quarterly">Quarterly</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label htmlFor="Class" className="text-xl font-bold">
-                          Class:{" "}
-                        </label>
-                        <select
-                          name="Class"
-                          id="Class"
-                          onChange={(e) => setClass1(e.target.value)}
-                          defaultValue={"default"}
-                          value={class1}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="1st Class">1st Class</option>
-                          <option value="2nd Class">2nd Class</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div
-                      className="mt-2 flex space-x-10"
-                      style={{ marginLeft: "42px" }}
-                    >
-                      <div>
-                        <label
-                          htmlFor="stationfrom"
-                          className="text-xl font-bold"
-                        >
-                          Station From:{" "}
-                        </label>
-                        <input
-                          type="text"
-                          name="stationfrom"
-                          className="mx-2 shadow-lg appearance-none border w-50 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) => setStationFrom(e.target.value)}
-                          value={stationfrom}
-                        ></input>
-                        <span>
-                          <span className="text-lg mx-2">to</span>
-                          <select
-                            name="Stationto"
-                            id="Stationto"
-                            onChange={(e) => setStationto(e.target.value)}
-                            defaultValue={"default"}
-                            value={stationto}
-                          >
-                            <option value={"default"} disabled>
-                              Choose
-                            </option>
-                            <option value="Dadar">Dadar</option>
-                            <option value="Matunga">Matunga</option>
-                            <option value="King Circle">King Circle</option>
-                            <option value="Vadala">Vadala</option>
-                          </select>
-                        </span>
-                      </div>
-
-                      <div>
-                        <label htmlFor="MobileNo" className="text-xl font-bold">
-                          Mobile Number:{" "}
-                        </label>
-                        <input
-                          type="tel"
-                          name="MobileNo"
-                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          value={userDetails.phnNumber}
-                          minLength={10}
-                          maxLength={10}
-                          required
-                        />
-                      </div>
-                    </div>
+                   
+                    
 
                     {/* /////////////////// */}
-                    <div
-                      className="mt-2 flex space-x-10"
-                      style={{ marginLeft: "30px" }}
-                    >
-                      <div>
-                        <label
-                          htmlFor="Category"
-                          className="ml-2 text-xl font-bold"
-                        >
-                          Category:{" "}
-                        </label>
-                        <select
-                          name="Category"
-                          id="Category"
-                          onChange={(e) => setCategory(e.target.value)}
-                          defaultValue={"default"}
-                          value={category}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="General">General</option>
-                          <option value="S.C.">S.C.</option>
-                          <option value="S.T.">S.T.</option>
-                        </select>
-                        <label
-                          htmlFor="Category"
-                          className="ml-8 text-lg font-bold"
-                        >
-                          Upload Caste Validity Certificate(If S.C/S.T then
-                          upload):{" "}
-                        </label>
-                        <input
-                          type="file"
-                          name="Category"
-                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) =>
-                            handleCasteInputChange(e.target.files)
-                          }
-                        ></input>{" "}
-                      </div>
-                    </div>
+                    
                     <div
                       className="mt-2 flex space-x-10"
                       style={{ marginLeft: "30px" }}
@@ -709,14 +526,14 @@ function Application() {
                           htmlFor="middlename"
                           className="text-lg font-bold"
                         >
-                          Registration ID:{" "}
+                          Card Number:{" "}
                         </label>
                         <input
                           type="text"
                           name="middlename"
                           className="mx-2 shadow-lg appearance-none border w-48 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
                           // onChange={(e) => setmiddleName(e.target.value)}
-                          value={userDetails.regId}
+                          value={cardNo}
                           minLength={3}
                           required
                           readOnly

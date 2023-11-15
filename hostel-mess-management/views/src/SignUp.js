@@ -79,7 +79,7 @@ function SignUp() {
           "http://localhost:5000/api/auth/createUser",
           {
             email: email,
-            cardNumber: cardNumber,
+            
             firstname: firstname,
             middlename: middlename,
             surname: surname,
@@ -158,23 +158,7 @@ function SignUp() {
                   required
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="registrationid"
-                  className="text-xl text-purple-violent font-bold"
-                >
-                  Card Number:{" "}
-                </label>
-                <input
-                  type="number"
-                 
-                  name="registrationid"
-                  className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                  onChange={(e) => setcardNumber(e.target.value)}
-                  value={cardNumber}
-                  minLength={10}
-                ></input>
-              </div>
+             
               <div>
                 <label
                   htmlFor="phonenumber"

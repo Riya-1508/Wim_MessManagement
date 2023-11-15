@@ -19,11 +19,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  cardNumber: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  
   phnNumber: {
     type: String,
     required: true,

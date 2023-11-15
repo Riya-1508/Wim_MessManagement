@@ -43,7 +43,7 @@ const diffToast = (message, type) => {
         {
           email,
           password,
-         cardNumber,
+        
         },
         config
       );
@@ -110,23 +110,7 @@ const diffToast = (message, type) => {
                 ></input>
               </div>
             </div>
-            <div className="my-4">
-              <label
-                htmlFor="password"
-                className="text-xl text-purple-violent font-bold"
-              >
-                Card Number:{" "}
-              </label>
-              <div>
-                <input
-                  type="password"
-                  name="password"
-                  className="my-2 shadow-lg appearance-none border rounded-2xl w-96 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                  onChange={(e) => setcardNumber(e.target.value)}
-                  value={cardNumber}
-                ></input>
-              </div>
-            </div>
+          
             <button
               type="submit"
               className="inline-block px-6 py-2.5 bg-white text-pink-violent font-medium text-lg leading-tight uppercase rounded-full shadow-md hover:dark:bg-gray-900 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"

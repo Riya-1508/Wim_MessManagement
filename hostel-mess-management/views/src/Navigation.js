@@ -104,7 +104,7 @@ function Navigation() {
                 to="/ApplicationForm"
                 className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
               >
-               Put a Leave
+              Registration Form
               </Link>
               {ticket ? 
               (<>
@@ -118,7 +118,7 @@ function Navigation() {
                 to="/renewal"
                 className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
               >
-                Renew Application
+               Put a Leave
               </Link>
               </>):(<></>)}
               <button

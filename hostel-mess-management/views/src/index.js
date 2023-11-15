@@ -20,7 +20,7 @@ import AboutUs from "./lib/About/AboutUs";
 const isAuthenticated = true;
 // const isAuthenticated = localStorage.getItem("token");
 const WebPages = () => {
-  document.title = "Railway Concession";
+  document.title = "VJTI Mess Management";
   return (
     <section className="listofwebpages">
       <BrowserRouter>

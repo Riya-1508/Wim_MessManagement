@@ -54,7 +54,7 @@ router.post(
       // Create a new user
       user = await User.create({
         email: req.body.email,
-        cardNumber: req.body.cardNumber,
+      
         firstname: req.body.firstname,
         middlename: req.body.middlename,
         surname: req.body.surname,
