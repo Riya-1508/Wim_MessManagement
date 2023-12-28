@@ -20,7 +20,7 @@ function SignUp() {
   const [phnNumber, setphnNumber] = useState("");
   const [error, setError] = useState(false);
   const [latestError, setLatestError] = useState("");
-
+const [regId, setregId] = useState("");
   // const[loading,setLoading] = useState(false)
   const [message, setMessage] = useState("");
 
@@ -84,6 +84,7 @@ function SignUp() {
             middlename: middlename,
             surname: surname,
             phnNumber: phnNumber,
+            regId: regId,
             password: password,
             confirmpassword: confirmpassword,
           },
@@ -150,7 +151,6 @@ function SignUp() {
                 </label>
                 <input
                   type="email"
-                  
                   name="title"
                   className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
                   onChange={(e) => setEmail(e.target.value)}
@@ -158,7 +158,7 @@ function SignUp() {
                   required
                 />
               </div>
-             
+
               <div>
                 <label
                   htmlFor="phonenumber"
@@ -227,6 +227,23 @@ function SignUp() {
                 ></input>
               </div>
             </div>
+            <div>
+              <label
+                htmlFor="registrationid"
+                className="text-xl text-purple-violent font-bold"
+              >
+                Registration ID:{" "}
+              </label>
+              <input
+                type="number"
+                maxLength={9}
+                name="registrationid"
+                className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                onChange={(e) => setregId(e.target.value)}
+                value={regId}
+                minLength={10}
+              ></input>
+            </div>
             <div className="my-1 flex space-x-10">
               <div>
                 <label
@@ -271,13 +288,14 @@ function SignUp() {
               Submit
             </button>
           </form>
-            <ToastContainer limit = {1}/>
+          <ToastContainer limit={1} />
           <div className="my-1 text-white">
             <div className="text-xl text-black">Already have account?</div>
             <Link
               to="/Login"
               className="text-2xl text-black text-center underline cursor-pointer hover:dark:bg-gray-900 hover:text-white"
-            >Log In
+            >
+              Log In
             </Link>
           </div>
         </div>

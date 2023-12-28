@@ -28,15 +28,15 @@ function Navigation() {
     }
   }, []);
   const [loading, setLoading] = useState(true);
-  const [ticket, setTicket] = useState("");
+  const [card, setcard] = useState("");
   const loggedInUserRegId = localStorage.getItem("userRegId");
   const fetchTicket = async (regId) => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
       );
-      setTicket(response.data?.ticketNo);
-      localStorage.setItem('ticket', ticket);
+      setcard(response.data?.cardNo);
+      localStorage.setItem('ticket',card);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -51,103 +51,121 @@ function Navigation() {
   
   return (
     <div className="dark:bg-gray-400">
-      
       <nav className="flex flex-row items-center h-16 px-4 bg-gray-300 text-white">
-      {loading?(<></>
-):
-      (
-        <>
-        {isAuthenticated ? (
-          <>
-            <img
-              src={NavigationImage}
-              className="h-16 animate-bounce"
-              alt=""
-              style={{marginTop:"15px"}}
-            ></img>
-            {ticket?(<>
-            <Link
-              to="/slip"
-              className="ml-4 text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2"
-            >
-              Slip
-            </Link></>):(<></>)}
-          </>
+        {loading ? (
+          <></>
         ) : (
-          <img
-            src={NavigationImage}
-            className="h-16 animate-bounce"
-            alt=""
-          ></img>
-        )}
+          <>
+            {isAuthenticated ? (
+              <>
+                <img
+                  src={NavigationImage}
+                  className="h-16 animate-bounce"
+                  alt=""
+                  style={{ marginTop: "15px" }}
+                ></img>
+                {card ? (
+                  <>
+                    <Link
+                      to="/slip"
+                      className="ml-4 text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2"
+                    >
+                      Slip
+                    </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            ) : (
+              <img
+                src={NavigationImage}
+                className="h-16 animate-bounce"
+                alt=""
+              ></img>
+            )}
 
-        <div className="flex ml-auto items-center space-x-4">
-          <Link
-            to="/"
-            className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-          >
-           Home
-          </Link>
-
-          <div className="flex ml-auto items-center space-x-4">
-          <Link
-            to="/Menu"
-            className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-          >
-            Menu
-          </Link>
-          
-        
-          {isAuthenticated ? (
-            <>
+            <div className="flex ml-auto items-center space-x-4">
               <Link
-                to="/ApplicationForm"
-                className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                to="/"
+                className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
               >
-              Registration Form
+                Home
               </Link>
-              {ticket ? 
-              (<>
+
+              <div className="flex ml-auto items-center space-x-4">
                 <Link
-                to="/ApplicationFormEdit"
-                className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
-              >
-                Edit Form
-              </Link>
-              <Link
-                to="/renewal"
-                className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
-              >
-               Put a Leave
-              </Link>
-              </>):(<></>)}
-              <button
-                className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/SignUp"
-                className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to="/Login"
-                className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-              >
-                Sign In
-              </Link>
-            </>
-          )}
-        </div>
-        </div>
-        </>
-      )}
+                  to="/Menu"
+                  className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                >
+                  Menu
+                </Link>
+                <Link
+                  to="/Review"
+                  className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                >
+                  Feedback
+                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      to="/ApplicationForm"
+                      className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                    >
+                      Registration Form
+                    </Link>
+
+                    {card ? (
+                      <>
+                        <a
+                          href="https://rzp.io/l/TtqB8suQ"
+                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                        >
+                          Payment
+                        </a>
+                        <Link
+                          to="/ApplicationFormEdit"
+                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                        >
+                          Edit Form
+                        </Link>
+                        <Link
+                          to="/leave"
+                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                        >
+                          Put a Leave
+                        </Link>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <button
+                      className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/SignUp"
+                      className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                    >
+                      Sign Up
+                    </Link>
+                    <Link
+                      to="/Login"
+                      className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                    >
+                      Sign In
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
       </nav>
     </div>
   );

@@ -20,25 +20,16 @@ router.post(
     body("surname", "Enter a valid name").isLength({ min: 3 }),
     body("dob", "Enter a valid dob").isLength(),
     body("age", "Enter a valid age").isLength({ max: 2, min: 1 }),
-    body("gender", "Enter a valid dob").isLength(),
-    body("course", "Enter a valid dob").isLength(),
-    body("year", "Enter a valid dob").isLength(),
-    body("duration", "Enter a valid dob").isLength(),
-    body("class1", "Enter a valid dob").isLength(),
-    //body('stationfrom', 'Enter a valid dob').isLength(),
-    body("stationto", "Enter a valid dob").isLength(),
-    // body('passduration', 'Enter a valid dob').isLength(),
-    // // body('ticketNo', 'Enter a ticket Number').isLength({ max: 4,min:4 }),
-    body("ticketNo", "Enter a ticket Number").isLength(),
+    // body("gender", "Enter a valid dob").isLength(),
+   
+  
+
     // body('class2', 'Enter a valid dob').isLength(),
     // body('periodfrom', 'Enter a valid dob').isLength(),
     // body('periodto', 'Enter a valid dob').isLength(),
-    body("category", "Enter a valid dob").isLength(),
+   
     body("address", "Enter a valid dob").isLength(),
-    body("regId", "Enter a valid username").isLength(),
-    body("startdate", "Enter start date").isLength(),
-    body("enddate", "Enter end date").isLength(),
-    body("isPresent", "True if address matches").isLength(),
+   
     // mo
   ],
   async (req, res) => {
@@ -48,22 +39,22 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      if (req.body.isPresent == false) {
-        console.log(
-          req.body.isPresent,
-          "ID card address not matching to station from"
-        );
-        return res.status(400).json({
-          error:
-            "Sorry the entered station does not match with your ID card address",
-        });
-      }
+      // if (req.body.isPresent == false) {
+      //   console.log(
+      //     req.body.isPresent,
+      //     "ID card address not matching to station from"
+      //   );
+      //   return res.status(400).json({
+      //     error:
+      //       "Sorry the entered station does not match with your ID card address",
+      //   });
+      // }
       let user1 = await FormUser.findOne({ phnNumber: req.body.phnNumber });
-      if (user1) {
-        return res.status(400).json({
-          error: "Sorry a user with this phone number already exists",
-        });
-      }
+      // if (user1) {
+      //   return res.status(400).json({
+      //     error: "Sorry a user with this phone number already exists",
+      //   });
+      // }
 
       const currentDate = new Date();
 
@@ -106,24 +97,14 @@ router.post(
         surname: req.body.surname,
         dob: req.body.dob,
         age: req.body.age,
-        gender: req.body.gender,
-        course: req.body.course,
-        year: req.body.year,
-        duration: req.body.duration,
-        class1: req.body.class1,
-        stationfrom: req.body.stationfrom,
-        stationto: req.body.stationto,
-        passduration: req.body.passduration,
-        ticketNo: req.body.ticketNo,
+
         // class2: req.body.class2,
         // periodfrom: req.body.periodfrom,
         // periodto: req.body.periodto,
-        category: req.body.category,
+        gender: req.body.gender,
         address: req.body.address,
-        phnNumber: req.body.phnNumber,
         regId: req.body.regId,
-        startdate: startdate,
-        enddate: enddate,
+        cardNo: req.body.cardNo,
       });
       const data = {
         user: {

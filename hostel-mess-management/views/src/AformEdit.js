@@ -61,14 +61,14 @@ function ApplicationEdit() {
 
   //CHECKING IF TICKET ALREADY EXISTS
   const [loading, setLoading] = useState(true);
-  const [ticket, setTicket] = useState("");
+  const [card, setcardNo] = useState("");
   const loggedInUserRegId = localStorage.getItem("userRegId");
   const fetchTicket = async (regId) => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
       );
-      setTicket(response.data?.ticketNo);
+      setcardNo(response.data?.cardNo);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -212,7 +212,7 @@ function ApplicationEdit() {
         <>Loading</>//initial loading
       ):
       (<>
-      {ticket?(<>
+      {card?(<>
       <div className="flex h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
         <div
           className={`bg-white w-[1000px] h-[470px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${

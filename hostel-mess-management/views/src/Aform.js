@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import SignUp from "./SignUp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function Application() {
   var filedata = "";
   // const [firstname, setFirstName] = useState("");
@@ -34,6 +35,7 @@ function Application() {
   const [category, setCategory] = useState();
   const [address, setAddress] = useState("");
   const [phnNumber, setphnNumber] = useState("");
+  const [cardNo, setcardNo] = useState("");
   const [selectedImage, setSelectImage] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -50,6 +52,11 @@ function Application() {
     });
   };
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      window.location = "/Login";
+    }
+  }, []);
+  useEffect(() => {
     fetchUserDetails(loggedInUserEmail);
   }, [loggedInUserEmail]);
   const fetchUserDetails = async (email) => {
@@ -64,7 +71,7 @@ function Application() {
   };
 
   //CHECKING IF TICKET ALREADY EXISTS
-  const [ticket, setTicket] = useState("");
+  const [card, setcard] = useState("");
   const loggedInUserRegId = localStorage.getItem("userRegId");
 
   useEffect(() => {
@@ -75,7 +82,7 @@ function Application() {
       const response = await axios.get(
         `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
       );
-      setTicket(response.data?.ticketNo);
+      setcard(response.data?.cardNo);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -87,6 +94,7 @@ function Application() {
       }
     }
   };
+
 
   function calculateAge(dateOfBirth) {
     const dob = new Date(dateOfBirth);
@@ -111,8 +119,7 @@ function Application() {
   };
 
   function generateAlphanumericHash(regId) {
-    const alphanumericChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let hash = "";
+    let cardNo = "";
 
     // Helper function to generate random number between 0 and max (exclusive) using a seed
     function generateRandomNumber(max, seed) {
@@ -120,28 +127,16 @@ function Application() {
       return Math.floor((x - Math.floor(x)) * max);
     }
 
-    // Generate 3 capital letters
-    for (let i = 0; i < 3; i++) {
-      const randomIndex = generateRandomNumber(26, regId + i); // Use regId as seed
-      hash += alphanumericChars[randomIndex];
-    }
+    // Generate 3-digit random number
+    const randomNumber = generateRandomNumber(1000, regId); // Use regId as seed
+    cardNo = randomNumber.toString().padStart(3, "0");
 
-    // Generate 5 numbers
-    for (let i = 0; i < 5; i++) {
-      const randomIndex = generateRandomNumber(10, regId + i + 3); // Use regId as seed
-      hash += alphanumericChars[randomIndex + 26]; // Start numbers after letters
-    }
-
-    // Generate 2 letters
-    for (let i = 0; i < 2; i++) {
-      const randomIndex = generateRandomNumber(26, regId + i + 7); // Use regId as seed
-      hash += alphanumericChars[randomIndex];
-    }
-
-    return hash;
+    return cardNo;
   }
 
-  const cardNo = generateAlphanumericHash(userDetails.phnNumber);
+  //  const cardNo = generateAlphanumericHash(userDetails.phnNumber);
+ 
+
 
   const [isPageLoaded, setPageLoaded] = useState(false);
 
@@ -265,9 +260,10 @@ function Application() {
     }
   };
 
+  
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    
     try {
       const config = {
         headers: {
@@ -275,36 +271,38 @@ function Application() {
         },
       };
       //setLoading(true)
-      console.log(isPresent);
-      const { data } = await axios.post(
-        "http://localhost:5000/api/formAuth/fillForm",
-        {
-          firstname: userDetails.firstname,
-          middlename: userDetails.middlename,
-          surname: userDetails.surname,
+      // setcardNo(generatedCardNo);
+       const generatedCardNo = generateAlphanumericHash(userDetails.phnNumber);
+       const { data } = await axios.post(
+         "http://localhost:5000/api/formAuth/fillForm",
+         {
+           firstname: userDetails.firstname,
+           middlename: userDetails.middlename,
+           surname: userDetails.surname,
           dob: dob,
           age: age,
           gender: gender,
-          course: course,
-          year: year,
-          
-          
-          cardNo: cardNo,
+          // course: course,
+          // year: year,
+
+          cardNo: generatedCardNo,
           // class2: class2,
           // periodfrom: periodfrom,
           // periodTo: periodTo,
-         
+
           address: address,
-          phnNumber: userDetails.phnNumber,
-          isPresent: isPresent,
+          regId:userDetails.regId,
+          // phnNumber: userDetails.phnNumber,
+          // isPresent: isPresent,
         },
         config
-      );
-
-      console.log(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      diffToast("Application submitted successfully", "success");
-      window.location = "/Slip";
+        );
+        
+        console.log(data);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        diffToast("Application submitted successfully", "success");
+        window.location = "/Slip";
+        setcardNo(generatedCardNo);
     } catch (error) {
       setError(error.response.data.message);
       diffToast("Provide valid Details", "error");
@@ -312,251 +310,239 @@ function Application() {
   };
 
   const value = true;
+
   return (
     <div>
       <Navigation />
-      {loading ? (
-        <>Loading</> //initial loading
-      ) : (
-        <>
-          {ticket ? (
-            <>
-              <div className="flex  flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
-                <div
-                  className={`w-[800px] h-[340px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
-                    isPageLoaded ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <div className="aform">
-                    Your application form has been created already!
-                  </div>
+      <>
+        {card ? (
+          <>
+            <div className="flex  flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
+              <div
+                className={`w-[800px] h-[340px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+                  isPageLoaded ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <div className="aform">
+                  Your are already a part of our MESS!Your Card Number: {card}
                 </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="flex h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
-                <div
-                  className={`bg-white w-[1000px] h-[720px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
-                    isPageLoaded ? "opacity-100" : "opacity-0"
-                  }`}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
+              <div
+                className={`bg-white w-[1000px] h-[720px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+                  isPageLoaded ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <div className="flex flex-row w-full h-12 text-2xl font-bond justify-center items-center dark:bg-gray-900 text-white">
+                  Application Form{" "}
+                </div>
+                <form
+                  autoComplete="on"
+                  className="grid grid-col-3 space-x-3 space-y-10 content-center"
                 >
-                  <div className="flex flex-row w-full h-12 text-2xl font-bond justify-center items-center dark:bg-gray-900 text-white">
-                    Application Form{" "}
-                  </div>
-                  <form
-                    autoComplete="on"
-                    className="grid grid-col-3 space-x-3 space-y-10 content-center"
+                  <div
+                    className="mt-2 ml flex space-x-5"
+                    style={{ marginLeft: "80px" }}
                   >
-                    <div
-                      className="mt-2 ml flex space-x-5"
-                      style={{ marginLeft: "80px" }}
-                    >
-                      <div>
-                        <label
-                          htmlFor="firstname"
-                          className="ml-2 text-lg font-bold"
-                        >
-                          First Name:{" "}
-                        </label>
-                        <input
-                          type="text"
-                          name="firstname"
-                          className="mx-2 shadow-lg appearance border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          value={userDetails.firstname}
-                          minLength={3}
-                          required
-                          readOnly
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="middlename"
-                          className="text-lg font-bold"
-                        >
-                          Middle Name:{" "}
-                        </label>
-                        <input
-                          type="text"
-                          name="middlename"
-                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          value={userDetails.middlename}
-                          minLength={3}
-                          required
-                          readOnly
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="surname" className="text-lg font-bold">
-                          Surname:{" "}
-                        </label>
-                        <span>
-                          <input
-                            type="text"
-                            name="surname"
-                            className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                            value={userDetails.surname}
-                            minLength={3}
-                            required
-                            readOnly
-                          />
-                        </span>
-                      </div>
+                    <div>
+                      <label
+                        htmlFor="firstname"
+                        className="ml-2 text-lg font-bold"
+                      >
+                        First Name:{" "}
+                      </label>
+                      <input
+                        type="text"
+                        name="firstname"
+                        className="mx-2 shadow-lg appearance border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        value={userDetails.firstname}
+                        minLength={3}
+                        required
+                        readOnly
+                      />
                     </div>
-                    <div
-                      className="my-1 flex space-x-1"
-                      style={{ marginLeft: "80px" }}
-                    >
-                      <div>
-                        <label htmlFor="dob" className="ml-2 text-xl font-bold">
-                          D.O.B:{" "}
-                        </label>
+                    <div>
+                      <label htmlFor="middlename" className="text-lg font-bold">
+                        Middle Name:{" "}
+                      </label>
+                      <input
+                        type="text"
+                        name="middlename"
+                        className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        value={userDetails.middlename}
+                        minLength={3}
+                        required
+                        readOnly
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="surname" className="text-lg font-bold">
+                        Surname:{" "}
+                      </label>
+                      <span>
                         <input
-                          type="date"
-                          name="dob"
-                          className="mx-2 shadow-lg appearance border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={handleDobChange}
-                          value={dob}
+                          type="text"
+                          name="surname"
+                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                          value={userDetails.surname}
+                          minLength={3}
                           required
+                          readOnly
                         />
-                      </div>
-                      <div>
-                        <label htmlFor="age" className="text-xl font-bold">
-                          Age:{" "}
-                        </label>
-                        <input
-                          type="number"
-                          
-                          name="age"
-                          disabled
-                          className="mx-2 shadow-lg appearance-none border w-36 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) => setAge(e.target.value)}
-                          value={age}
-                          minLength={1}
-                          maxLength={2}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="gender"
-                          className="text-xl font-bold ml-16"
-                        >
-                          Gender:{" "}
-                        </label>
-                        <select
-                          name="gender"
-                          id="cars"
-                          onChange={(e) => setgender(e.target.value)}
-                          defaultValue={"default"}
-                          value={gender}
-                        >
-                          <option value={"default"} disabled>
-                            Choose
-                          </option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="my-1 flex space-x-1"
+                    style={{ marginLeft: "80px" }}
+                  >
+                    <div>
+                      <label htmlFor="dob" className="ml-2 text-xl font-bold">
+                        D.O.B:{" "}
+                      </label>
+                      <input
+                        type="date"
+                        name="dob"
+                        className="mx-2 shadow-lg appearance border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        onChange={handleDobChange}
+                        value={dob}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="age" className="text-xl font-bold">
+                        Age:{" "}
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        disabled
+                        className="mx-2 shadow-lg appearance-none border w-36 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        onChange={(e) => setAge(e.target.value)}
+                        value={age}
+                        minLength={1}
+                        maxLength={2}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="gender"
+                        className="text-xl font-bold ml-16"
+                      >
+                        Gender:{" "}
+                      </label>
+                      <select
+                        name="gender"
+                        id="cars"
+                        onChange={(e) => setgender(e.target.value)}
+                        defaultValue={"default"}
+                        value={gender}
+                      >
+                        <option value={"default"} disabled>
+                          Choose
+                        </option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* /////////////////// */}
+
+                  <div
+                    className="mt-2 flex space-x-10"
+                    style={{ marginLeft: "30px" }}
+                  >
+                    <div>
+                      <label
+                        htmlFor="Address"
+                        className="ml-2 text-xl font-bold"
+                      >
+                        Address:{" "}
+                      </label>
+                      <input
+                        type="text"
+                        name="Address"
+                        className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        onChange={(e) => setAddress(e.target.value)}
+                        value={address}
+                      ></input>
                     </div>
                    
-                    
-
-                    {/* /////////////////// */}
-                    
-                    <div
-                      className="mt-2 flex space-x-10"
-                      style={{ marginLeft: "30px" }}
-                    >
+                    <div className="mt-2 flex space-x-10">
                       <div>
                         <label
-                          htmlFor="Address"
+                          htmlFor="Sign"
                           className="ml-2 text-xl font-bold"
                         >
-                          Address:{" "}
-                        </label>
-                        <input
-                          type="text"
-                          name="Address"
-                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) => setAddress(e.target.value)}
-                          value={address}
-                        ></input>
-                      </div>
-
-                      <div className="mt-2 flex space-x-10">
-                        <div>
-                          <label
-                            htmlFor="Sign"
-                            className="ml-2 text-xl font-bold"
-                          >
-                            Upload Signature of Student:{" "}
-                          </label>
-                          <input
-                            type="file"
-                            name="Sign"
-                            className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                            onChange={(e) =>
-                              handleSignatureInputChange(e.target.files)
-                            }
-                          ></input>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="mt-2 flex space-x-10"
-                      style={{ marginLeft: "30px" }}
-                    >
-                      <div>
-                        <label
-                          htmlFor="AadharCard"
-                          className="ml-2 text-xl font-bold"
-                        >
-                          Student ID Card(having address):{" "}
+                          Upload Signature of Student:{" "}
                         </label>
                         <input
                           type="file"
-                          accept="image/*"
-                          name="AadharCard"
-                          className="mx-1 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) => handleIDInputChange(e.target.files)}
+                          name="Sign"
+                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                          onChange={(e) =>
+                            handleSignatureInputChange(e.target.files)
+                          }
                         ></input>
-                        <label
-                          htmlFor="middlename"
-                          className="text-lg font-bold"
-                        >
-                          Card Number:{" "}
-                        </label>
-                        <input
-                          type="text"
-                          name="middlename"
-                          className="mx-2 shadow-lg appearance-none border w-48 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          // onChange={(e) => setmiddleName(e.target.value)}
-                          value={cardNo}
-                          minLength={3}
-                          required
-                          readOnly
-                        />
                       </div>
                     </div>
-                    <button
-                      type="submit"
-                      className="inline-block m-auto w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md dark:bg-gray-900 text-white hover:bg-white hover:text-gray-900 hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
-                      // className="inline-block m-auto w-32 px-4 py-2.5 bg-blue text-pink font-medium text-lg leading-tight uppercase rounded-full shadow-md hover:dark:bg-gray-900 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
-                      onClick={submitHandler}
-                      style={{ marginLeft: "43%" }}
-                    >
-                      Submit
-                    </button>
-                    <ToastContainer limit={1}/>
-                  </form>
-                </div>
+                  </div>
+                  <div
+                    className="mt-2 flex space-x-10"
+                    style={{ marginLeft: "30px" }}
+                  >
+                    <div>
+                      <label
+                        htmlFor="AadharCard"
+                        className="ml-2 text-xl font-bold"
+                      >
+                        Student ID Card(having address):{" "}
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="AadharCard"
+                        className="mx-1 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        onChange={(e) => handleIDInputChange(e.target.files)}
+                      ></input>
+                      <label htmlFor="middlename" className="text-lg font-bold">
+                        Registration ID:{" "}
+                      </label>
+                      <input
+                        type="text"
+                        name="middlename"
+                        className="mx-2 shadow-lg appearance-none border w-48 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                        // onChange={(e) => setmiddleName(e.target.value)}
+                        value={userDetails.regId}
+                        minLength={3}
+                        required
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="inline-block m-auto w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md dark:bg-gray-900 text-white hover:bg-white hover:text-gray-900 hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
+                    // className="inline-block m-auto w-32 px-4 py-2.5 bg-blue text-pink font-medium text-lg leading-tight uppercase rounded-full shadow-md hover:dark:bg-gray-900 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
+                    onClick={submitHandler}
+                    style={{ marginLeft: "43%" }}
+                  >
+                    Submit
+                  </button>
+                  <ToastContainer limit={1} />
+                </form>
               </div>
-            </>
-          )}
-        </>
-      )}
+            </div>
+          </>
+        )}
+      </>
 
       <Footer />
     </div>

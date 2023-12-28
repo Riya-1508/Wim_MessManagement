@@ -7,6 +7,11 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  phnNumber: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   firstname: {
     type: String,
     required: true,
@@ -19,8 +24,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  
-  phnNumber: {
+  regId: {
     type: String,
     required: true,
     unique: true,

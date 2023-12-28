@@ -55,11 +55,11 @@ router.post(
       user = await User.create({
         email: req.body.email,
       
+        phnNumber: req.body.phnNumber,
         firstname: req.body.firstname,
         middlename: req.body.middlename,
         surname: req.body.surname,
-
-        phnNumber: req.body.phnNumber,
+        regId: req.body.regId,
         password: secPass,
         confirmpassword: secPass1,
       });

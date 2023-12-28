@@ -37,7 +37,7 @@ function Slip({ isButtonClick }) {
 
    //CHECKING IF TICKET ALREADY EXISTS
    const [loading, setLoading] = useState(true);
-   const [ticket, setTicket] = useState("");
+   const [card, setcard] = useState("");
    useEffect(() => {
      fetchTicket(loggedInUserRegId);
    }, [loggedInUserRegId]);
@@ -46,7 +46,7 @@ function Slip({ isButtonClick }) {
        const response = await axios.get(
          `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
        );
-       setTicket(response.data?.ticketNo);
+       setcard(response.data?.cardNo);
        setLoading(false);
      } catch (error) {
        if (error.response && error.response.status === 404) {
@@ -83,7 +83,7 @@ function Slip({ isButtonClick }) {
         <>Loading</>//initial loading
       ):(
         <>
-      {ticket ?
+      {card ?
       (
         <>
         <div
@@ -96,7 +96,7 @@ function Slip({ isButtonClick }) {
           style={{ marginTop: "10vh" }}
         >
           <h1 style={{ fontSize: "24px", fontWeight: "bold", color: "#333" }}>
-            SLIP PREVIEW
+            MESS CARD PREVIEW
           </h1>
         </div>
 
@@ -129,7 +129,7 @@ function Slip({ isButtonClick }) {
                             />
                           </td>
                           <td className="text-cell" bgcolor="#ffe77b">
-                            <h2>Railway Concession Slip</h2>
+                            <h2>VJTI Mess Card</h2>
                             <p>
                               Veermata Jijabai Technological Institute, Matunga,
                               Mumbai
@@ -156,52 +156,18 @@ function Slip({ isButtonClick }) {
                             {FormUser.middlename} {FormUser.surname}
                           </p>
                         </div>
-                        <div className="col-2">
-                          <p>
-                            <b>Validity :</b> <span>{FormUser.startdate}</span>{" "}
-                            <b>-</b> <span>{FormUser.enddate}</span>
-                          </p>
-                        </div>
-                        <div className="col-2">
-                          <p>
-                            {" "}
-                            <b> Duration :</b> {FormUser.duration}
-                          </p>
-                        </div>
+                       
                       </div>
                     </div>
                   </div>
 
-                  <div className="center-table">
-                    <div className="mt-2 row justify-content-left">
-                      <div className="col-2">
-                        <p>
-                          {" "}
-                          <b> Class type : </b>
-                          {FormUser.class1}{" "}
-                        </p>
-                      </div>
-                      <div className="col-2">
-                        <p>
-                          <b>Station :</b> <span>{FormUser.stationfrom}</span>{" "}
-                          <b>-</b> <span>{FormUser.stationto}</span>
-                        </p>
-                      </div>
-                      <div className="col-2">
-                        <p>
-                          {" "}
-                          <b>Category : </b>
-                          {FormUser.category}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  
 
                   <div className="center-table">
                     <div className="mt-2 row justify-content-left">
                       <div className="col-3">
                         <p>
-                          <b>Ticket ID : </b> {FormUser.ticketNo}
+                          <b>Card Number : </b> {FormUser.cardNo}
                         </p>
                       </div>
                       <div className="col-2">
@@ -242,7 +208,7 @@ function Slip({ isButtonClick }) {
             className="inline-block px-6 py-2.5 bg-dark:bg-gray-900 text-pink-violent font-medium text-lg leading-tight uppercase rounded-full shadow-md hover:dark:bg-gray-900 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
             onClick={downloadAsPDF}
           >
-            Download Concession slip
+            Download Your Mess Card
           </button>
         </div>
         {/* </div> */}

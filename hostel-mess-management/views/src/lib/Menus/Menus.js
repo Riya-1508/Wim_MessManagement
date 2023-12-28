@@ -41,18 +41,23 @@
 import React from 'react';
 import './menus.css';
 import menus from '../dummyData';
-
+import Navigation from "../../Navigation";
+import Footer from '../../Footer'
 class Menu extends React.Component {
   render() {
     return (
       <div className="menu">
+        <Navigation />
         <header>
           <div className="header">
             <div className="carousel">
               {menus.map((menu) => (
                 <div key={menu._id} className="carousel--item card">
                   <h1>
-                    <a href={`/menus/${menu._id}`} style={{ textDecoration: 'none' }}>
+                    <a
+                      href={`/menus/${menu._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
                       <div className="food-items">
                         <img src={menu.image} alt={menu.weekday} />
                         <div className="details">
@@ -71,6 +76,7 @@ class Menu extends React.Component {
             </div>
           </div>
         </header>
+       <Footer/>
       </div>
     );
   }

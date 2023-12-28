@@ -12,11 +12,11 @@ import ForgotPassword from "./ForgotPassword";
 import PasswordReset from "./ResetPassword";
 import Slip from "./Slip";
 import GenerateSlip from "./GenerateSlip";
-import RenewForm from "./RenewForm";
+import LeaveForm from "./LeaveForm.js";
 import ApplicationEdit from "./AformEdit";
 import Menus from "./lib/Menus/Menus";
 import AboutUs from "./lib/About/AboutUs";
-
+import Review from "./ReviewForm.js"
 const isAuthenticated = true;
 // const isAuthenticated = localStorage.getItem("token");
 const WebPages = () => {
@@ -28,8 +28,9 @@ const WebPages = () => {
           <Route path="/" element={<Home />} />
           <Route path="Signup" element={<SignUp />} />
           <Route path="Login" element={<Login />} />
-          <Route path="Menu" element={<Menus/>}/>
-          <Route path="AboutUs" element={<AboutUs/>}/>
+          <Route path="Menu" element={<Menus />} />
+          <Route path="/Review" element={<Review />} />
+          <Route path="AboutUs" element={<AboutUs />} />
 
           {isAuthenticated ? (
             <Route path="ApplicationForm" element={<Application />} />
@@ -52,7 +53,8 @@ const WebPages = () => {
             <Navigate to="/Login" replace />
           )}
 
-          <Route path="/renewal" element={<RenewForm />} />
+          <Route path="/leave" element={<LeaveForm />} />
+
           <Route path="/generateSlip" element={<GenerateSlip />} />
         </Routes>
       </BrowserRouter>
