@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import SignUp from "./SignUp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SignatureCanvas from "react-signature-canvas";
 
 function Application() {
   var filedata = "";
@@ -26,6 +27,8 @@ function Application() {
   const [stationfrom, setStationFrom] = useState("");
   const [stationto, setStationto] = useState();
   // const [regID, setregId] = useState("");
+    const [sigCanvas, setSigCanvas] = useState({});
+
   const [userDetails, setUserDetails] = useState("");
 
   // const [ticketNo, setticketNo] = useState("");isPresent
@@ -146,119 +149,23 @@ function Application() {
       setPageLoaded(true);
     }, 100);
   }, []);
+  useEffect(() => {
+    // Set up the signature canvas
+    setSigCanvas({});
 
-  const levenshteinDistance = (word1, word2) => {
-    const m = word1.length;
-    const n = word2.length;
-    const dp = [...Array(m + 1)].map(() => Array(n + 1).fill(0));
+    return () => {
+      // Clean up the signature canvas
+      setSigCanvas({});
+    };
+  }, []);
 
-    for (let i = 0; i <= m; i++) {
-      dp[i][0] = i;
-    }
-
-    for (let j = 0; j <= n; j++) {
-      dp[0][j] = j;
-    }
-
-    for (let i = 1; i <= m; i++) {
-      for (let j = 1; j <= n; j++) {
-        if (word1[i - 1] === word2[j - 1]) {
-          dp[i][j] = dp[i - 1][j - 1];
-        } else {
-          dp[i][j] = Math.min(
-            dp[i - 1][j - 1] + 1,
-            dp[i][j - 1] + 1,
-            dp[i - 1][j] + 1
-          );
-        }
-      }
-    }
-
-    return dp[m][n];
-  };
-  const handleIDInputChange = async (files) => {
-    const file = files[0];
-    console.log(file);
-    const filename = `${uuidv4()}-${file.name}`;
-    const { data, error } = await supabase.storage
-      .from("aadhar-card-images")
-      .upload(filename, file);
-    const T = require("tesseract.js");
-
-    T.recognize(file, "eng").then((out) => {
-      filedata = out.data.text.slice(14, out.data.text.indexOf("Hostelize"));
-      console.log(filedata);
-
-      // Check if station is present in the filedata string
-      // const station = "candoa"; //66.67% similar to bandra so will give true for minimum accuracy <= 66.67%
-      // const station = "rajai oadr"; //trying with space
-
-      const station = stationfrom; //this will be what user enters
-      // const station = "candoa"; //this will be what user enters
-      const percentage = 0.5; // Minimum accuracy needed out of 1 //not required as considering no. of char
-
-      const words = station.split(/\s+/);
-
-      isPresent = words.reduce((result, word) => {
-        return result && checkPresence(filedata, word, percentage);
-      }, true);
-
-      //true if max 2 char differs and length, order is same
-      console.log(`Is ${station} present:`, isPresent);
-    });
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(data.Key);
-      // Save the file path to your database or perform other actions
-    }
+  const handleSignatureClear = () => {
+    sigCanvas.clear();
   };
 
-  const checkPresence = (filedata, station, percentage) => {
-    const words = filedata
-      .toLowerCase()
-      .split(/\W+/)
-      .filter((word) => word !== "");
-    // const threshold = 1 - percentage; // Set the accuracy threshold
-    const threshold = 2.0 / station.length; //only 2 chars can be wrong
-    console.log(station, threshold, words);
-    station = station.toLowerCase();
-    const similarityThreshold = Math.floor(station.length * threshold);
-    const isPresent = words.some((word) => {
-      const distance = levenshteinDistance(station, word);
-      return distance <= similarityThreshold;
-    });
-    return isPresent;
-  };
-
-  const handleSignatureInputChange = async (files) => {
-    const file = files[0];
-    const filename = `${uuidv4()}-${file.name}`;
-    const { data, error } = await supabase.storage
-      .from("signature")
-      .upload(filename, file);
-
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(data.Key);
-      // Save the file path to your database or perform other actions
-    }
-  };
-  const handleCasteInputChange = async (files) => {
-    const file = files[0];
-    const filename = `${uuidv4()}-${file.name}`;
-    const { data, error } = await supabase.storage
-      .from("caste-validity")
-      .upload(filename, file);
-
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(data.Key);
-      // Save the file path to your database or perform other actions
-    }
-  };
+  
+  
+  
 
   
   const submitHandler = async (e) => {
@@ -319,7 +226,7 @@ function Application() {
           <>
             <div className="flex  flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
               <div
-                className={`w-[800px] h-[340px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+                className={`w-[800px] h-[40px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
                   isPageLoaded ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -333,12 +240,12 @@ function Application() {
           <>
             <div className="flex h-screen flex justify-center items-center bg-cover bg-center bg-no-repeat bg-picSignUp">
               <div
-                className={`bg-white w-[1000px] h-[720px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
+                className={`bg-white w-[1000px] h-[500px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
                   isPageLoaded ? "opacity-100" : "opacity-0"
                 }`}
               >
                 <div className="flex flex-row w-full h-12 text-2xl font-bond justify-center items-center dark:bg-gray-900 text-white">
-                  Application Form{" "}
+                  Membership Form{" "}
                 </div>
                 <form
                   autoComplete="on"
@@ -474,59 +381,54 @@ function Application() {
                         value={address}
                       ></input>
                     </div>
-                   
+
                     <div className="mt-2 flex space-x-10">
+                      <div>
+                        <label
+                          htmlFor="middlename"
+                          className="text-lg font-bold"
+                        >
+                          Registration ID:{" "}
+                        </label>
+                        <input
+                          type="text"
+                          name="middlename"
+                          className="mx-2 shadow-lg appearance-none border w-48 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                          // onChange={(e) => setmiddleName(e.target.value)}
+                          value={userDetails.regId}
+                          minLength={3}
+                          required
+                          readOnly
+                        />
+                      </div>
                       <div>
                         <label
                           htmlFor="Sign"
                           className="ml-2 text-xl font-bold"
                         >
-                          Upload Signature of Student:{" "}
+                          Digital Signature of Student:{" "}
                         </label>
-                        <input
-                          type="file"
-                          name="Sign"
-                          className="mx-2 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                          onChange={(e) =>
-                            handleSignatureInputChange(e.target.files)
-                          }
-                        ></input>
+                        <SignatureCanvas
+                          penColor="black"
+                          canvasProps={{
+                            className: "mx-2 shadow-lg border w-64 h-32",
+                            style: { border: "1px solid #ccc" },
+                          }}
+                          ref={(ref) => setSigCanvas(ref)}
+                        />
+                        <button
+                          onClick={handleSignatureClear}
+                          className="mt-2 px-2 py-1 bg-blue text-black rounded-md shadow-md hover:bg-blue-dark"
+                        >
+                          Clear Signature
+                        </button>
                       </div>
                     </div>
                   </div>
                   <div
                     className="mt-2 flex space-x-10"
                     style={{ marginLeft: "30px" }}
-                  >
-                    <div>
-                      <label
-                        htmlFor="AadharCard"
-                        className="ml-2 text-xl font-bold"
-                      >
-                        Student ID Card(having address):{" "}
-                      </label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name="AadharCard"
-                        className="mx-1 shadow-lg appearance-none border w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                        onChange={(e) => handleIDInputChange(e.target.files)}
-                      ></input>
-                      <label htmlFor="middlename" className="text-lg font-bold">
-                        Registration ID:{" "}
-                      </label>
-                      <input
-                        type="text"
-                        name="middlename"
-                        className="mx-2 shadow-lg appearance-none border w-48 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
-                        // onChange={(e) => setmiddleName(e.target.value)}
-                        value={userDetails.regId}
-                        minLength={3}
-                        required
-                        readOnly
-                      />
-                    </div>
-                  </div>
+                  ></div>
                   <button
                     type="submit"
                     className="inline-block m-auto w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md dark:bg-gray-900 text-white hover:bg-white hover:text-gray-900 hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"

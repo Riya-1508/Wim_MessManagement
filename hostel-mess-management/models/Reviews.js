@@ -10,6 +10,11 @@ const ReviewSchema = new Schema({
     // required: true
     // unique:true
   },
+  rating: {
+    type: Number,
+    // required: true
+    // unique:true
+  },
 });
 
 const Review = mongoose.model("reviews", ReviewSchema);

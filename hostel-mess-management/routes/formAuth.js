@@ -198,56 +198,20 @@ router.post(
         });
       }
 
-      const currentDate = new Date();
-
-      // Function to format date to dd-mm-yyyy
-      const formatDate = (date) => {
-        const day = date.getDate().toString().padStart(2, "0");
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-      };
-
-      // Get the date after 1 month
-      const dateAfterOneMonth = new Date(currentDate);
-      dateAfterOneMonth.setMonth(dateAfterOneMonth.getMonth() + 1);
-
-      // Get the date after 4 months
-      const dateAfterFourMonths = new Date(currentDate);
-      dateAfterFourMonths.setMonth(dateAfterFourMonths.getMonth() + 4);
-
-      // Set the duration based on your condition (e.g., "monthly" or "quarterly")
-      const duration = req.body.duration; // Change this value as needed
-
-      let enddate;
-
-      if (duration === "Monthly") {
-        enddate = formatDate(dateAfterOneMonth);
-      } else if (duration === "Quarterly") {
-        enddate = formatDate(dateAfterFourMonths);
-      }
-
-      const startdate = formatDate(currentDate);
-
-      console.log("Start Date:", startdate);
-      console.log("End Date:", enddate);
+     
 
       // Update the user's fields based on the request body
       user.firstname = req.body.firstname;
       user.middlename = req.body.middlename;
       user.surname = req.body.surname;
-      (user.year = req.body.year),
-        // (user.duration = req.body.duration),
-        // (user.class1 = req.body.class1),
-        (user.stationfrom = req.body.stationfrom),
-        (user.stationto = req.body.stationto),
+    
+      (user.phnNumber = req.body.phnNumber),
+      (user.regId = req.body.regId),
         // (user.passduration = req.body.passduration),
         (user.address = req.body.address),
-        (user.phnNumber = req.body.phnNumber),
-        (user.regId = req.body.regId),
         // (user.startdate = startdate),
         // (user.enddate = enddate),
-        (user.course = req.body.course),
+        
         // Save the updated user document
         await user.save();
 

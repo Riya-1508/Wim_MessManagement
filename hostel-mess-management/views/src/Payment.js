@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import html2pdf from "html2pdf.js";
-import "./Slip.css";
+import "./Payment.css";
 import Navigation from "./Navigation.js";
 import Footer from "./Footer.js";
 import Logo from "./Logo.png";
@@ -35,37 +35,35 @@ function Slip({ isButtonClick }) {
     }, 100);
   }, []);
 
-   //CHECKING IF TICKET ALREADY EXISTS
-   const [loading, setLoading] = useState(true);
-   const [card, setcard] = useState("");
-   useEffect(() => {
-     fetchTicket(loggedInUserRegId);
-   }, [loggedInUserRegId]);
-   const fetchTicket = async (regId) => {
-     try {
-       const response = await axios.get(
-         `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
-       );
-       setcard(response.data?.cardNo);
-       setLoading(false);
-     } catch (error) {
-       if (error.response && error.response.status === 404) {
-       console.log('Ticket does not exist yet!');
-       setLoading(false);
-     } else {
-       console.log(error);
-       setLoading(false);
-     }
-     }
-   };
-
-   
+  //CHECKING IF TICKET ALREADY EXISTS
+  const [loading, setLoading] = useState(true);
+  const [card, setcard] = useState("");
+  useEffect(() => {
+    fetchTicket(loggedInUserRegId);
+  }, [loggedInUserRegId]);
+  const fetchTicket = async (regId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/formAuth/getformuser?regId=${regId}`
+      );
+      setcard(response.data?.cardNo);
+      setLoading(false);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log("Ticket does not exist yet!");
+        setLoading(false);
+      } else {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+  };
 
   const downloadAsPDF = () => {
     const contentDiv = document.getElementById("pdf-content");
     const opt = {
       margin: 50,
-      width:500,
+      width: 500,
       filename: "slip.pdf",
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },

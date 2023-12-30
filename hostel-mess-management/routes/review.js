@@ -26,6 +26,7 @@ router.post(
       review = await Reviews.create({
       name: req.body.name,
       feedback: req.body.feedback,
+      rating: req.body.rating
       });
       //  leave.save();
       const data = {
@@ -40,4 +41,35 @@ router.post(
     }
   }
 );
+router.get("/analyze-ratings", async (req, res) => {
+  try {
+    const reviews = await Review.find({}, "rating feedback"); // Fetch both rating and feedback
+
+    // Perform analysis (you can customize this based on your requirements)
+    const analysis = analyzeReviews(reviews);
+
+    // Respond with the analysis results
+    res.json(analysis);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Function to perform analysis on reviews
+const analyzeReviews = (reviews) => {
+  // Add your analysis logic here
+  // Example: Count the occurrences of each rating and collect feedback
+  const ratingCounts = reviews.reduce((acc, review) => {
+    acc[review.rating] = (acc[review.rating] || 0) + 1;
+    return acc;
+  }, {});
+
+  const feedbackData = reviews.map((review) => ({
+    rating: review.rating,
+    feedback: review.feedback,
+  }));
+
+  return { ratingCounts, feedbackData };
+};
 module.exports = router;

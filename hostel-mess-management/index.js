@@ -22,6 +22,8 @@ app.use("/api/formAuth", require("./routes/formAuth"));
 app.use("/api/passwordReset", require("./routes/passwordReset"));
 app.use("/api/leaveauth", require("./routes/leaveauth"));
 app.use("/api/review", require("./routes/review"));
+app.use("/api/reviewlist", require("./routes/reviewlist"));
+
 
 app.listen(port, () => {
   console.log(`iNotebook backend listening at http://localhost:${port}`);

@@ -7,13 +7,15 @@ import ErrorMessage from "./ErrorMesssge.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-
+import Rating from "react-rating-stars-component";
+import ReviewsList from "./ReviewList.js";
+import ReviewChart from "./ReviewChart.js";
 function ReviewApplication() {
   const [name, setname] = useState("");
 
     const [feedback, setfeedback] = useState("");
-
-
+ const [rating, setRating] = useState(0);
+const [reviews, setReviews] = useState([]); 
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
   const [isPageLoaded, setPageLoaded] = useState(false);
@@ -52,14 +54,16 @@ function ReviewApplication() {
         {
           name:name,
           feedback:feedback,
+          rating:rating,
         },
         config
       );
       //    setLoading(false)
-
-     
+ setRating(0);
+     setReviews([...reviews, data]);
       localStorage.setItem("userInfo", JSON.stringify(data));
      diffToast("Feedback submitted successfully", "success");
+      window.location = "/Review";
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -75,6 +79,7 @@ function ReviewApplication() {
             className={`bg-white w-[1000px] h-[300px] flex flex-col space-y-10 justifiy-center items-center transition-opacity duration-1000 ${
               isPageLoaded ? "opacity-100" : "opacity-0"
             }`}
+            style={{ marginTop: "-240px" }}
           >
             <div className="flex flex-row w-full h-12 text-2xl font-bond justify-center items-center dark:bg-gray-900 text-white">
               Give your Feedback{" "}
@@ -118,7 +123,19 @@ function ReviewApplication() {
                   minLength={3}
                 />
               </div>
-
+              <div className="mt-2 flex space-x-10">
+                <label htmlFor="rating" className="text-lg font-bold">
+                  Rating :{" "}
+                </label>
+                <Rating
+                  count={5}
+                  onChange={(rating) => setRating(rating)}
+                  size={24}
+                  color1={"#999999"}
+                  color2={"#FFD700"}
+                  value={rating}
+                />
+              </div>
               <button
                 type="submit"
                 className="inline-block m-auto w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md dark:bg-gray-900 text-white hover:bg-white hover:text-gray-900 hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
@@ -130,10 +147,10 @@ function ReviewApplication() {
               </button>
               <ToastContainer limit={1} />
             </form>
+            <ReviewsList />
           </div>
         </div>
       </>
-
       <Footer />
     </>
   );

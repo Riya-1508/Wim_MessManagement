@@ -1,0 +1,47 @@
+/* ReviewsList.css */
+
+.reviews-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    width: 300px;
+    background-color: #f0f4f8;
+    /* Light blue-gray background color */
+    box-shadow: 0 4px 8px rgba(74, 85, 104, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: #1a202c;
+    /* Dark gray heading color */
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #2d3748;
+    /* Medium gray text color */
+    font-size: 1rem;
+}
+
+/* Add more styling as per your preference */

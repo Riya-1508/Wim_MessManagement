@@ -70,7 +70,7 @@ function Navigation() {
                       to="/slip"
                       className="ml-4 text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2"
                     >
-                      Slip
+                      Mess Card
                     </Link>
                   </>
                 ) : (
