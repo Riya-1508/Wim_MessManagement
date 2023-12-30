@@ -1,0 +1,16 @@
+/* PieChart.css */
+#chart-container {
+    text-align: center;
+}
+
+#chart-container h2 {
+    font-size: 24px;
+    /* Increase the font size of the title */
+}
+
+#chart-container canvas {
+    width: 100px;
+    /* Set the desired width for the chart */
+    height: 100px;
+    /* Set the desired height for the chart */
+}
