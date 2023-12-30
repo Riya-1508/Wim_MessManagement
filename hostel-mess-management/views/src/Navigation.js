@@ -110,7 +110,7 @@ function Navigation() {
                   <>
                     <Link
                       to="/ApplicationForm"
-                      className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                      className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
                     >
                       Registration Form
                     </Link>
@@ -119,19 +119,19 @@ function Navigation() {
                       <>
                         <a
                           href="https://rzp.io/l/TtqB8suQ"
-                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                          className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
                         >
                           Payment
                         </a>
                         <Link
                           to="/ApplicationFormEdit"
-                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                          className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
                         >
                           Edit Form
                         </Link>
                         <Link
                           to="/leave"
-                          className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                          className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
                         >
                           Put a Leave
                         </Link>
@@ -140,7 +140,7 @@ function Navigation() {
                       <></>
                     )}
                     <button
-                      className="text-black font-semibold hover:dark:bg-gray-900 hover:text-white rounded-lg px-4 py-2 animate-fadein"
+                      className="text-black font-semibold rounded-lg px-4 py-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
                       onClick={handleLogout}
                     >
                       Logout
