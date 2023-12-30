@@ -17,6 +17,7 @@ import ApplicationEdit from "./AformEdit";
 import Menus from "./lib/Menus/Menus";
 import AboutUs from "./lib/About/AboutUs";
 import Review from "./ReviewForm.js"
+import ReviewChart from "./ReviewChart.js"
 const isAuthenticated = true;
 // const isAuthenticated = localStorage.getItem("token");
 const WebPages = () => {
@@ -31,6 +32,7 @@ const WebPages = () => {
           <Route path="Menu" element={<Menus />} />
           <Route path="/Review" element={<Review />} />
           <Route path="AboutUs" element={<AboutUs />} />
+          <Route path="/ReviewAnalysis" element={<ReviewChart />} />
 
           {isAuthenticated ? (
             <Route path="ApplicationForm" element={<Application />} />
