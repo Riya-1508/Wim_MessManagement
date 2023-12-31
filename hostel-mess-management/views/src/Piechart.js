@@ -12,8 +12,8 @@ const PieChart = ({ ratings }) => {
 
     // Modify the canvas or apply additional styles
     if (canvas) {
-      canvas.style.border = "2px solid red";
-      // Add more modifications as needed
+      canvas.style.border = "2px solid blue";
+      
     }
   }, []);
   const data = {
@@ -38,15 +38,24 @@ const PieChart = ({ ratings }) => {
       },
     ],
   };
-
+const containerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
   const titleStyle = {
     fontSize: "24px", // Increase the font size of the title
   };
 
   return (
-    <div id="chart-container" ref={chartContainerRef}>
+    <div id="chart-container" style={containerStyle} ref={chartContainerRef}>
       <h2 style={titleStyle}>Ratings Distribution</h2>
-      <Pie data={data} />
+      <Pie
+        data={data}
+        width={1300}
+        height={600}
+        options={{ responsive: false }}
+      />
     </div>
   );
 };
