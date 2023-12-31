@@ -9,6 +9,135 @@ var jwt = require("jsonwebtoken");
 var fetchuser = require("../middleware/fetchuser");
 const bodyParser = require("body-parser");
 const JWT_SECRET = "Harryisagoodb$oy";
+const OTP = require("../models/OTP");
+const otpGenerator = require("otp-generator");
+
+//otp 
+// router.post("/sendOTP", async (req,res) => {
+//   try{
+//       //fetch email from req body
+//       const {email} = req.body;
+//       //check if user already present
+//       const checkUserPresent = await User.findOne({email});
+//       //return a response if registered
+//       if(checkUserPresent) {
+//           return res.status(401).json({
+//               success:false,
+//               message:'User already registered'
+//           })
+//       }
+//       //if not,generate an OTP
+//       var otp = otpGenerator.generate(6, {
+//           upperCaseAlphabets:false,
+//           lowerCaseAlphabets:false,
+//           specialChars:false,
+//       });
+
+//       console.log("otp generated:",otp);
+
+//       //check for unique otp or not
+//       const result = await OTP.findOne({otp: otp});
+//       while(result) {
+//           otp = otpGenerator.generate(6,{
+//               upperCaseAlphabets:false,
+//               lowerCaseAlphabets:false,
+//               specialChars:false,
+//           });
+//           result = await OTP.findOne({otp: otp});
+//       }
+//       //we can use a library for generating a unique otp everytime
+
+//       //create an entry into DB for otp
+//       const otpPayload = {email, otp};
+
+//       const otpBody = await OTP.create(otpPayload);
+//       console.log("otp body: ",otpBody);
+
+//       //return a response
+//       return res.status(200).json({
+//           success: true,
+//           message: 'OTP set successfully.',
+//           otp
+//       })
+
+
+//   } catch(err) {
+//       console.log("error occurred while generating an otp!",err.message);
+//       return res.status(500).json({
+//           success: false,
+//           message: err.message,
+//       })
+//   }
+  
+// })
+
+
+router.post("/sendOTP", async (req, res) => {
+  try {
+    // Fetch email from request body
+    const { email } = req.body;
+
+    // Generate an OTP
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+    });
+
+    console.log("OTP generated:", otp);
+
+    // Implement email sending logic here using nodemailer or any email service
+    // ... (Your email sending logic)
+
+    // Return a response indicating success
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent successfully.",
+      otp, // Include the OTP in the response for testing (remove in production)
+    });
+  } catch (error) {
+    console.error("Error sending OTP:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Error sending OTP.",
+      error: error.message,
+    });
+  }
+});
+
+module.exports = router;
+router.post("/verifyOTP", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+
+    if (recentOtp.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP not found!!",
+      });
+    } else if (otp !== recentOtp[0].otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Entered OTP is invalid!!",
+      });
+    }
+
+    // OTP verification successful
+    return res.status(200).json({
+      success: true,
+      message: "OTP verified successfully.",
+    });
+  } catch (error) {
+    console.error("Error verifying OTP:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Error verifying OTP",
+    });
+  }
+});
+
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 let success = false;
@@ -122,6 +251,7 @@ router.post(
     }
   }
 );
+
 
 // ROUTE 2: Retrieve form user data using: GET "/api/formAuth/formusers".
 router.get("/formusers", async (req, res) => {

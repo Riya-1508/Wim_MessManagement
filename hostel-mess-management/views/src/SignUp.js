@@ -20,6 +20,10 @@ function SignUp() {
   const [phnNumber, setphnNumber] = useState("");
   const [error, setError] = useState(false);
   const [latestError, setLatestError] = useState("");
+
+  const [otpSent, setOtpSent] = useState(false);
+const [otpInput, setOtpInput] = useState("");
+
 const [regId, setregId] = useState("");
   // const[loading,setLoading] = useState(false)
   const [message, setMessage] = useState("");
@@ -62,6 +66,24 @@ const [regId, setregId] = useState("");
       });
     }
   };
+  const sendOTP = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/formAuth/sendOTP", {
+        email: email,
+      });
+
+      if (response.data.success) {
+        diffToast("OTP sent successfully!", "success");
+        setOtpSent(true);
+      } else {
+        diffToast("Failed to send OTP", "error");
+      }
+    } catch (error) {
+      console.error("Error sending OTP:", error.message);
+      diffToast("Error sending OTP", "error");
+    }
+  };
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmpassword) {
@@ -74,6 +96,12 @@ const [regId, setregId] = useState("");
             "Content-type": "application/json",
           },
         };
+
+
+
+        
+        
+
         //setLoading(true)
         const { data } = await axios.post(
           "http://localhost:5000/api/auth/createUser",
@@ -128,6 +156,8 @@ const [regId, setregId] = useState("");
       }
     }
   };
+
+
 
   return (
     <div>
@@ -280,6 +310,36 @@ const [regId, setregId] = useState("");
                 />
               </div>
             </div>
+
+            <div className="my-1 flex space-x-10">
+            <div>
+              <label
+                htmlFor="otp"
+                className="text-xl text-purple-violent font-bold"
+              >
+                OTP:{" "}
+              </label>
+              <input
+                type="text"
+                name="otp"
+                className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
+                onChange={(e) => setOtpInput(e.target.value)}
+                value={otpInput}
+                disabled={!otpSent}
+                required
+              />
+            </div>
+            <div>
+              <button
+                className="inline-block w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md bg-gray-400 text-red-600 hover:bg-gray-700 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
+                onClick={sendOTP}
+                disabled={otpSent}
+              >
+                Send OTP
+              </button>
+            </div>
+          </div>
+          
             <button
               type="submit"
               className="inline-block w-32 px-4 py-2.5 font-medium text-lg leading-tight uppercase rounded-full shadow-md bg-gray-400 text-red-600 hover:bg-gray-700 hover:text-white hover:shadow-lg focus:bg-pink-violent focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-violent active:text-white active:shadow-lg transition duration-150 ease-in-out"
@@ -306,3 +366,4 @@ const [regId, setregId] = useState("");
 }
 
 export default SignUp;
+ 
