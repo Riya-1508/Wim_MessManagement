@@ -113,7 +113,7 @@ function Footer() {
                 <>
                   <p className="mb-4">
                     <a href="/ApplicationForm" className="text-gray-600">
-                      Application Form
+                     Membership Form
                     </a>
                   </p>
                   <p className="mb-4">
@@ -121,11 +121,7 @@ function Footer() {
                       Edit Application Form
                     </a>
                   </p>
-                  <p className="mb-4">
-                    <a href="/renewal" className="text-gray-600">
-                      Renew Application Form
-                    </a>
-                  </p>
+                 
                 </>
               ) : (
                 <>
@@ -141,11 +137,7 @@ function Footer() {
                   </p>
                 </>
               )}
-              <p>
-                <a href={Pdf} target="blank" className="text-gray-600" download>
-                  Documentation
-                </a>
-              </p>
+             
             </div>
             <div className="">
               <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
