@@ -87,7 +87,7 @@ const diffToast = (message, type) => {
                 <input
                   type="email"
                   name="title"
-                  className="my-2 shadow-lg appearance border rounded-2xl w-96 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="my-2 shadow-lg appearance border rounded-2xl w-96 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 ></input>
@@ -104,7 +104,7 @@ const diffToast = (message, type) => {
                 <input
                   type="password"
                   name="password"
-                  className="my-2 shadow-lg appearance-none border rounded-2xl w-96 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="my-2 shadow-lg appearance-none border rounded-2xl w-96 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 ></input>

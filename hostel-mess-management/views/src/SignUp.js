@@ -152,7 +152,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="email"
                   name="title"
-                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   required
@@ -169,7 +169,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="tel"
                   name="phonenumber"
-                  className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
                   onChange={(e) => setphnNumber(e.target.value)}
                   value={phnNumber}
                   minLength={10}
@@ -188,7 +188,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="text"
                   name="firstname"
-                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:shadow-outline"
                   onChange={(e) => setFirstName(e.target.value)}
                   value={firstname}
                   minLength={3}
@@ -204,7 +204,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="text"
                   name="name"
-                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:shadow-outline"
                   onChange={(e) => setmiddleName(e.target.value)}
                   value={middlename}
                   minLength={3}
@@ -220,7 +220,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="text"
                   name="name"
-                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:bg-red-600 hover:text-white focus:shadow-outline"
                   onChange={(e) => setsurName(e.target.value)}
                   value={surname}
                   minLength={3}
@@ -238,7 +238,7 @@ const [regId, setregId] = useState("");
                 type="number"
                 maxLength={9}
                 name="registrationid"
-                className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:shadow-outline"
                 onChange={(e) => setregId(e.target.value)}
                 value={regId}
                 minLength={10}
@@ -255,7 +255,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="password"
                   name="password"
-                  className="mx-2 shadow-lg appearance border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance borderrounded-2xl w-64 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-black focus:shadow-outline"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   minLength={5}
@@ -272,7 +272,7 @@ const [regId, setregId] = useState("");
                 <input
                   type="password"
                   name="confirmpassword"
-                  className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 hover:text-white focus:outline-indigo-100 focus:shadow-outline"
+                  className="mx-2 shadow-lg appearance-none border rounded-2xl w-64 py-2 px-3 text-gray-700 leading-tight hover:dark:bg-gray-900 focus:ring-indigo-500 focus:border-indigo-500 hover:text-white focus:shadow-outline"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   value={confirmpassword}
                   minLength={5}
