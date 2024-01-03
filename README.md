@@ -15,16 +15,10 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [Description](#description)
-- [Links](#links)
+- [Description](#description) 
 - [Tech Stack](#tech-stack)
-- [Progress](#progress)
-- [Future Scope](#future-scope)
-- [Applications](#applications)
 - [Project Setup](#project-setup)
-- [Usage](#usage)
 - [Team Members](#team-members)
-- [Mentors](#mentors)
 - [Screenshots](#screenshots)
 
 </details>
