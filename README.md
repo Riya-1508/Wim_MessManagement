@@ -48,6 +48,11 @@ The key features of **VJTI Mess Management** :
 
 #### Database
 - MongoDB
+## 👨‍💻Team Members
+
+- Riya Kasture- kastureriya@gmail.com 
+- Siddhi Behere - siddhibehere2003@gmail.com
+- Srushti Ubale - srushtiubale008@gmail.com
 
 ## 🛠Project Setup
 
@@ -71,9 +76,4 @@ nodemon index.js
 
 
 
-## 👨‍💻Team Members
-
-- Riya Kasture- kastureriya@gmail.com 
-- Siddhi Behere - siddhibehere2003@gmail.com
-- Srushti Ubale - srushtiubale008@gmail.com
 
