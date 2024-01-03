@@ -1,9 +1,9 @@
 <h1 align="center">
   
-    <img src="https://res.cloudinary.com/dn6vz8exv/image/upload/v1665664791/inh_zzefoy.jpg" alt="CoC Inheritance 2022" width="500" height="166">
+   
   </a>
   <br>
-  VJTI Khana Junction(Mess Management)
+  VJTI Khana Junction(Mess Management) - Group 3
 </h1>
 
 <div align="center">
@@ -31,14 +31,14 @@
 
 ## 📝Description
 
-A highly effective and user-friendly website that gives you information about the best colleges in the top 5 countries that provide high-quality education.
+A Website to streamline meal, assign card numbers, track leaves, and facilitate online payment for students, ensuring efficient and user-friendly mess services.
 
-The key features of **Study Abroad** :
-- The website gives info about the colleges available for post graduation and graduation courses.
-- Provides a list of colleges for a selected course.
-- Provides the eligibility details,fees and exams of a selected college
-- Provides scholarship and accomodation details of a college
-- Search bar with filters for colleges
+The key features of **VJTI Mess Management** :
+1. User signup: customers will be able to create accounts with their personal info including name, email, contact details and reg id  
+2. User login: user can login to account using email and password or can use forget password functionality which sends an email link to create a new password.
+3. User membership form: user will be given a membership by assigning a unique mess card No. after which he/she can apply for mess leave if necessary ,download the mess card and edit the profile details
+4.A feedback form is provided which accepts feedback from user and analyzes the ratings given by the users and display them using a pie chart
+
 
 
 
