@@ -10,7 +10,6 @@ function GenerateSlip() {
       pdfGeneratorRef.current.generatePDF();
     }
   };
-
   useEffect(() => {
     // When the page loads, check if there is data in localStorage
     const pdfData = localStorage.getItem("pdfData");
@@ -20,7 +19,6 @@ function GenerateSlip() {
       pdfGeneratorRef.current.setFormUsers(formData);
     }
   }, []);
-
   return (
     <div>
       {/* ... your existing JSX ... */}

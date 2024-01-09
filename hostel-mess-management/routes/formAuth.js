@@ -13,88 +13,55 @@ const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 
 //otp 
-// router.post("/sendOTP", async (req,res) => {
-//   try{
-//       //fetch email from req body
-//       const {email} = req.body;
-//       //check if user already present
-//       const checkUserPresent = await User.findOne({email});
-//       //return a response if registered
-//       if(checkUserPresent) {
-//           return res.status(401).json({
-//               success:false,
-//               message:'User already registered'
-//           })
-//       }
-//       //if not,generate an OTP
-//       var otp = otpGenerator.generate(6, {
-//           upperCaseAlphabets:false,
-//           lowerCaseAlphabets:false,
-//           specialChars:false,
-//       });
-
-//       console.log("otp generated:",otp);
-
-//       //check for unique otp or not
-//       const result = await OTP.findOne({otp: otp});
-//       while(result) {
-//           otp = otpGenerator.generate(6,{
-//               upperCaseAlphabets:false,
-//               lowerCaseAlphabets:false,
-//               specialChars:false,
-//           });
-//           result = await OTP.findOne({otp: otp});
-//       }
-//       //we can use a library for generating a unique otp everytime
-
-//       //create an entry into DB for otp
-//       const otpPayload = {email, otp};
-
-//       const otpBody = await OTP.create(otpPayload);
-//       console.log("otp body: ",otpBody);
-
-//       //return a response
-//       return res.status(200).json({
-//           success: true,
-//           message: 'OTP set successfully.',
-//           otp
-//       })
-
-
-//   } catch(err) {
-//       console.log("error occurred while generating an otp!",err.message);
-//       return res.status(500).json({
-//           success: false,
-//           message: err.message,
-//       })
-//   }
-  
-// })
-
 
 router.post("/sendOTP", async (req, res) => {
   try {
     // Fetch email from request body
-    const { email } = req.body;
-
-    // Generate an OTP
-    const otp = otpGenerator.generate(6, {
-      upperCaseAlphabets: false,
-      lowerCaseAlphabets: false,
-      specialChars: false,
+    //fetch email from req body
+    const {email} = req.body;
+    //check if user already present
+    const checkUserPresent = await User.findOne({email});
+    //return a response if registered
+    if(checkUserPresent) {
+        return res.status(401).json({
+            success:false,
+            message:'User already registered'
+        })
+    }
+    //if not,generate an OTP
+    var otp = otpGenerator.generate(6, {
+        upperCaseAlphabets:false,
+        lowerCaseAlphabets:false,
+        specialChars:false,
     });
 
-    console.log("OTP generated:", otp);
+    console.log("otp generated:",otp);
 
-    // Implement email sending logic here using nodemailer or any email service
-    // ... (Your email sending logic)
+    //check for unique otp or not
+    const result = await OTP.findOne({otp: otp});
+    while(result) {
+        otp = otpGenerator.generate(6,{
+            upperCaseAlphabets:false,
+            lowerCaseAlphabets:false,
+            specialChars:false,
+        });
+        result = await OTP.findOne({otp: otp});
+    }
+    //we can use a library for generating a unique otp everytime
 
-    // Return a response indicating success
+    //create an entry into DB for otp
+    const otpPayload = {email, otp};
+
+    const otpBody = await OTP.create(otpPayload);
+    console.log("otp body: ",otpBody);
+
+    //return a response
     return res.status(200).json({
-      success: true,
-      message: "OTP sent successfully.",
-      otp, // Include the OTP in the response for testing (remove in production)
-    });
+        success: true,
+        message: 'OTP set successfully.',
+        otp:otpBody.otp,
+    })
+
   } catch (error) {
     console.error("Error sending OTP:", error.message);
     return res.status(500).json({
@@ -105,7 +72,7 @@ router.post("/sendOTP", async (req, res) => {
   }
 });
 
-module.exports = router;
+
 router.post("/verifyOTP", async (req, res) => {
   try {
     const { email, otp } = req.body;
@@ -151,7 +118,6 @@ router.post(
     body("age", "Enter a valid age").isLength({ max: 2, min: 1 }),
     // body("gender", "Enter a valid dob").isLength(),
    
-  
 
     // body('class2', 'Enter a valid dob').isLength(),
     // body('periodfrom', 'Enter a valid dob').isLength(),
@@ -168,22 +134,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      // if (req.body.isPresent == false) {
-      //   console.log(
-      //     req.body.isPresent,
-      //     "ID card address not matching to station from"
-      //   );
-      //   return res.status(400).json({
-      //     error:
-      //       "Sorry the entered station does not match with your ID card address",
-      //   });
-      // }
+      
       let user1 = await FormUser.findOne({ phnNumber: req.body.phnNumber });
-      // if (user1) {
-      //   return res.status(400).json({
-      //     error: "Sorry a user with this phone number already exists",
-      //   });
-      // }
+      
 
       const currentDate = new Date();
 
@@ -227,9 +180,7 @@ router.post(
         dob: req.body.dob,
         age: req.body.age,
 
-        // class2: req.body.class2,
-        // periodfrom: req.body.periodfrom,
-        // periodto: req.body.periodto,
+       
         gender: req.body.gender,
         address: req.body.address,
         regId: req.body.regId,

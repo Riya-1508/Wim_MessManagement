@@ -187,13 +187,6 @@ function Slip({ isButtonClick }) {
                                       marginLeft: "400px",
                                       transform: "rotate(0deg)",
                                     }}
-                                    // style={{
-                                    //   height: "15%",
-                                    //   width: "20%",
-                                    //   marginTop: "-15px",
-                                    //   marginLeft: "10px",
-                                    //   transform: "rotate(0deg)",
-                                    // }}
                                     alt=""
                                   />
                                 </div>

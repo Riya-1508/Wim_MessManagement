@@ -11,6 +11,7 @@ reset = async (email, subject, text) => {
         user: process.env.USER,
         pass: process.env.PASS,
       },
+      
     });
 
     await transporter.sendMail({

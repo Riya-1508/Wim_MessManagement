@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const atlasConnectionString = process.env.ATLAS_CONNECTION_STRING;
+const atlasConnectionString = process.env.MONGODB_URL;
 
 const connectToMongo = () => {
   mongoose
